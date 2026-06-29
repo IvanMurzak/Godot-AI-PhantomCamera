@@ -34,9 +34,17 @@ After a rebuild, the extension's `[AiToolType]` tool families are auto-discovere
 
 ## Tools
 
-| Tool | Description |
-| --- | --- |
-| `phantomcamera-echo` | Pure-managed readiness probe — echoes a message. |
-| `phantomcamera-editor-info` | Editor-only — returns the running Godot editor version + UI scale. |
+Every editor tool is **presence-gated**: when the Phantom Camera addon is not installed it returns a
+structured `installed: false` result with an install hint instead of crashing.
+
+| Tool | Kind | Description |
+| --- | --- | --- |
+| `phantomcamera-defaults` | pure-managed | Recommended starter config (priority, follow/look-at mode, damping). No addon needed. |
+| `phantomcamera-host-create` | editor | Ensure a `PhantomCameraHost` on a `Camera3D` (required by the addon to drive the real camera). |
+| `phantomcamera-create` | editor | Create a `PhantomCamera3D` virtual camera (optional name / parent / priority). |
+| `phantomcamera-set-follow` | editor | Set a PhantomCamera's follow mode and/or follow target. |
+| `phantomcamera-set-look-at` | editor | Set a PhantomCamera's look-at mode and/or look-at target. |
+| `phantomcamera-set-priority` | editor | Set a PhantomCamera's priority (higher wins). |
+| `phantomcamera-get` | editor | Read a PhantomCamera's scalar config (read-only). |
 
 License: Apache-2.0.

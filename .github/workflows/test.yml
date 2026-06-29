@@ -118,10 +118,13 @@ jobs:
       #   ADDON_TAG  — the RELEASE TAG to pin (never @latest — keeps the leg reproducible).
       #   ADDON_DIR  — the folder name under testbed/addons/ the addon installs into.
       #   ADDON_KIND — "gdscript" (class_name addon; a copy is enough) or "gdextension" (needs a linux .so).
-      ADDON_REPO: ""
-      ADDON_TAG: ""
-      ADDON_DIR: ""
-      ADDON_KIND: ""
+      # CLASS-B: this extension wraps the community Phantom Camera addon (ramokz/phantom-camera). The gated
+      # "Install the third-party addon" step downloads the pinned release into testbed/addons/phantom_camera
+      # before --import so its class_name types register and the presence-gated tools run against a real addon.
+      ADDON_REPO: "ramokz/phantom-camera"
+      ADDON_TAG: "v0.11.0.2"
+      ADDON_DIR: "phantom_camera"
+      ADDON_KIND: "gdscript"
     steps:
       - uses: actions/checkout@v6
 
