@@ -12,26 +12,35 @@ using com.IvanMurzak.McpPlugin;
 namespace com.IvanMurzak.Godot.MCP.PhantomCamera
 {
     /// <summary>
-    /// Sample MCP tool family for the PhantomCamera Tools extension (tool ids prefixed
-    /// <c>phantomcamera-*</c>). A tool family is one <c>[AiToolType]</c> <c>partial class</c>;
-    /// each tool method (<c>[AiTool("&lt;name&gt;")]</c> + <c>[Description]</c>) lives in its own
-    /// partial-class file. This is the SAME authoring model as Unity-MCP and the core Godot-MCP addon —
-    /// ReflectorNet reflects the attributes, McpPlugin's assembly scanner auto-discovers the family
-    /// once the package's source compiles into the consumer's Godot project (no registry edit needed).
+    /// MCP tool family for the <b>PhantomCamera Tools</b> extension (tool ids prefixed <c>phantomcamera-*</c>) —
+    /// AI tools for the community <a href="https://github.com/ramokz/phantom-camera">Phantom Camera</a> addon
+    /// (Cinemachine-style virtual cameras). The McpPlugin assembly scanner auto-discovers this
+    /// <c>[AiToolType]</c> family once the package's source compiles into the consumer's Godot project — no
+    /// registry edit needed.
     ///
     /// <para>
-    /// <b>Pure-managed vs editor-only.</b> Split tools by what API they touch, exactly like the core addon:
+    /// <b>Class B (addon-dependent).</b> Phantom Camera's classes are NOT in GodotSharp and the package must
+    /// NOT depend on the addon (that would break the "no addon/GodotSharp dependency" nuspec invariant and
+    /// force every consumer to vendor the exact addon version). So this family references Phantom Camera's
+    /// classes <b>only by string name</b>, resolved + driven at runtime via <c>AddonInterop</c>
+    /// (<c>GodotObject.Set/Get/Call</c> with GDScript <c>snake_case</c> member names), and <b>presence-gates</b>
+    /// every editor tool: a missing addon returns a structured <c>installed:false</c> result
+    /// (<see cref="PhantomCameraInfo.NotInstalled"/>) rather than crashing. The package compiles with the
+    /// addon ABSENT — it never names a Phantom Camera type.
+    /// </para>
+    ///
+    /// <para>
+    /// <b>Pure-managed vs editor-only.</b> Tools split by the API they touch:
     /// <list type="bullet">
     ///   <item>
-    ///     Tools with NO Godot native API surface (this file's <c>Echo</c>) stay OUTSIDE <c>#if TOOLS</c>
-    ///     so they compile in any consumer build AND are CI-unit-testable (no Godot binary required —
-    ///     a plain xUnit host can construct the class and call the method).
+    ///     No Godot native API (<c>phantomcamera-defaults</c>, in <c>Runtime/Tools/</c>) — outside
+    ///     <c>#if TOOLS</c>, CI-unit-testable with no Godot binary.
     ///   </item>
     ///   <item>
-    ///     Tools that touch the Godot editor (<c>EditorInterface</c>, live <c>Node</c>/<c>Resource</c>)
-    ///     live behind <c>#if TOOLS</c> (see <c>../../Editor/Tools/Tool_PhantomCamera.EditorInfo.cs</c>),
-    ///     so they are excluded from an exported game build, and they marshal onto the editor main thread
-    ///     via <c>MainThread.Instance.Run(...)</c> — NEVER touch Godot objects off-thread.
+    ///     Editor/scene-driving (<c>phantomcamera-host-create</c>, <c>-create</c>, <c>-set-follow</c>,
+    ///     <c>-set-look-at</c>, <c>-set-priority</c>, <c>-get</c>, in <c>Editor/Tools/</c>) — behind
+    ///     <c>#if TOOLS</c>, every Godot call marshalled via <c>MainThread.Instance.Run(...)</c>, the presence
+    ///     gate as the FIRST line, E2E-verified.
     ///   </item>
     /// </list>
     /// </para>
