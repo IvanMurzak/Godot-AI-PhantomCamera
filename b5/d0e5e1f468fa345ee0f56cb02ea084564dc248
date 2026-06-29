@@ -1,0 +1,23 @@
+src/Godot-AI-PhantomCamera/Runtime/Tools/Tool_PhantomCamera.Ids.cs
+  s_e3cea916442b5e::t_7af0d1a6dee67b 1-40
+src/Godot-AI-PhantomCamera/Runtime/Tools/Tool_PhantomCamera.cs
+  s_e3cea916442b5e::t_608b31d683acff 15-19,22-33,36-37,40-43
+src/Godot-AI-PhantomCamera/Runtime/Tools/Tool_PhantomCamera.Defaults.cs
+  s_e3cea916442b5e::t_977434877757d9 1-48
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "b5d0e5e1f468fa345ee0f56cb02ea084564dc248",
+  "prompts": {},
+  "sessions": {
+    "s_e3cea916442b5e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c575ab56-73e6-4952-bb8b-fef415924e27",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Ivan Murzak <Ivan.D.Murzak@gmail.com>"
+    }
+  }
+}
