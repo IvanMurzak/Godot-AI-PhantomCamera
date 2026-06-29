@@ -36,7 +36,12 @@
   -->
   <ItemGroup>
     <Compile Include="..\..\src\Godot-AI-PhantomCamera\Runtime\Tools\Tool_PhantomCamera.cs" Link="Source\Tool_PhantomCamera.cs" />
-    <Compile Include="..\..\src\Godot-AI-PhantomCamera\Runtime\Tools\Tool_PhantomCamera.Echo.cs" Link="Source\Tool_PhantomCamera.Echo.cs" />
+    <Compile Include="..\..\src\Godot-AI-PhantomCamera\Runtime\Tools\Tool_PhantomCamera.Ids.cs" Link="Source\Tool_PhantomCamera.Ids.cs" />
+    <Compile Include="..\..\src\Godot-AI-PhantomCamera\Runtime\Tools\Tool_PhantomCamera.Defaults.cs" Link="Source\Tool_PhantomCamera.Defaults.cs" />
+    <Compile Include="..\..\src\Godot-AI-PhantomCamera\Runtime\PhantomCamera\PhantomCameraEnums.cs" Link="Source\PhantomCameraEnums.cs" />
+    <Compile Include="..\..\src\Godot-AI-PhantomCamera\Runtime\PhantomCamera\PhantomCameraInfo.cs" Link="Source\PhantomCameraInfo.cs" />
+    <Compile Include="..\..\src\Godot-AI-PhantomCamera\Runtime\PhantomCamera\PhantomCameraDefaults.cs" Link="Source\PhantomCameraDefaults.cs" />
+    <Compile Include="..\..\src\Godot-AI-PhantomCamera\Runtime\Interop\AddonGate.cs" Link="Source\AddonGate.cs" />
   </ItemGroup>
 
 </Project>
