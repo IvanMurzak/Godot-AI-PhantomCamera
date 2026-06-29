@@ -48,10 +48,13 @@ jobs:
     if: needs.check-version-tag.outputs.tag_exists == 'false'
     strategy:
       fail-fast: false
+      # CLASS-B matrix floor = the wrapped addon's minimum Godot version. PhantomCamera v0.11.0.2's
+      # editor plugin does not boot cleanly on Godot 4.3.0 headless (its bundled panel SVG/font assets
+      # fail to import → the addon crashes on editor boot), so 4.3.0 is excluded. The source-injection
+      # recipe itself is version-agnostic (proven locally on 4.3.0 too), but the e2e leg force-installs
+      # the addon, which needs 4.4+. Supported = 4.4.1, 4.5.1.
       matrix:
         include:
-          - godot: "4.3.0"
-            sdk: "4.3.0"
           - godot: "4.4.1"
             sdk: "4.4.1"
           - godot: "4.5.1"
