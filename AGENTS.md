@@ -13,8 +13,7 @@ Phantom Camera is a third-party GDScript addon whose classes are NOT in GodotSha
 depend on it:
 
 - **No compile-time dependency.** Reference Phantom Camera classes **by string name only**, resolved at
-  runtime. `dotnet build -c Debug` MUST exit 0 with the addon ABSENT (the no-dependency gate; CI also asserts
-  the nuspec).
+  runtime. `dotnet build -c Debug` MUST exit 0 with the addon ABSENT (the no-dependency gate).
 - **Resolution:** Phantom Camera registers GDScript `class_name` types in the **global script-class list**,
   not `ClassDB`: resolve via `ProjectSettings.GetGlobalClassList()` + `GD.Load`. `ClassDB.ClassExists` returns
   `false` for a `class_name` type even when installed (the #1 trap).
@@ -55,8 +54,7 @@ depend on it:
 
 ## Tools
 
-Ids live in `Runtime/Tools/Tool_PhantomCamera.Ids.cs` (the source of truth). Each tool is one partial-class
-file named after it: pure-managed under `Runtime/Tools/`, editor tools under `Editor/Tools/`. Current tools:
+Ids live in `Runtime/Tools/Tool_PhantomCamera.Ids.cs` (the source of truth). Current tools:
 `phantomcamera-defaults` (pure-managed), `phantomcamera-host-create`, `phantomcamera-create`,
 `phantomcamera-set-follow`, `phantomcamera-set-look-at`, `phantomcamera-set-priority`, `phantomcamera-get`.
 
@@ -66,7 +64,7 @@ The addon **requires** a `PhantomCameraHost` companion (under the `Camera3D`), o
 ## Build / test (no Godot binary, addon absent)
 
 ```bash
-dotnet build src/Godot-AI-PhantomCamera/Godot-AI-PhantomCamera.csproj  # source-only package compiles tools (addon NOT needed)
+dotnet build src/Godot-AI-PhantomCamera/Godot-AI-PhantomCamera.csproj  # source-only package compiles tools
 dotnet test  tests/Godot-AI-PhantomCamera.Tests/Godot-AI-PhantomCamera.Tests.csproj
 dotnet pack  src/Godot-AI-PhantomCamera/Godot-AI-PhantomCamera.csproj -p:Version=0.0.0-ci -o local-nuget
 dotnet build testbed/PhantomCamera-Testbed.csproj                      # consumes the local package (injection proof)
@@ -84,7 +82,7 @@ re-restoring the testbed, or you silently build the stale cached source.
 - Root namespace `com.IvanMurzak.Godot.MCP.PhantomCamera`. Every `.cs` starts with the Apache-2.0 header.
 - Pure-managed code (tool ids, the `AddonGateResult` shape, name/enum-int constants, defaults) → `Runtime/`
   (outside `#if TOOLS`, unit-testable); editor-driving tools + `AddonInterop` → `#if TOOLS` (every Godot call
-  via `MainThread.Instance.Run(...)`, presence gate first, E2E-verified).
+  via `MainThread.Instance.Run(...)`, E2E-verified).
 - The package declares ONLY the `com.IvanMurzak.McpPlugin` / `com.IvanMurzak.ReflectorNet` min-version deps;
   **GodotSharp and the Phantom Camera addon must never become a package dependency** (CI asserts the nuspec).
   Keep the MCP pins in lockstep with the core Godot-MCP addon; bump with `commands/update-core.ps1`.
