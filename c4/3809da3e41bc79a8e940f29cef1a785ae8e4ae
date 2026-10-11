@@ -1,0 +1,25 @@
+docs/source-only-nuget-recipe.md
+  s_f593e7fa05bb4b::t_55d6d51ddc9f09 33-34
+src/Godot-AI-PhantomCamera/Godot-AI-PhantomCamera.csproj
+  s_f593e7fa05bb4b::t_df0a067d833e6d 36,68-69
+testbed/PhantomCamera-Testbed.csproj
+  s_f593e7fa05bb4b::t_4030e19fcdef38 26-27
+tests/Godot-AI-PhantomCamera.Tests/Godot-AI-PhantomCamera.Tests.csproj
+  s_f593e7fa05bb4b::t_4dd2b9b78d2eae 29-30
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "c43809da3e41bc79a8e940f29cef1a785ae8e4ae",
+  "prompts": {},
+  "sessions": {
+    "s_f593e7fa05bb4b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "ea515913-4e3a-4132-812b-63654f40f578",
+        "model": "unknown"
+      },
+      "human_author": "Ivan Murzak <Ivan.D.Murzak@gmail.com>"
+    }
+  }
+}
